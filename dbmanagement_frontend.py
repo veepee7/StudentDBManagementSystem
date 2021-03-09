@@ -6,10 +6,10 @@ import dbmanagement_backend
 
 class Student:
 
-    def __init__(self,root) :
+    def __init__(self,root):
         self.root = root
         self.root.title("Student Database Management System")
-        self.root.geometry("1300x750+0+0")
+        self.root.geometry("1350x750+0+0")
         self.root.config(bg="cadet blue")
 
         StdID = StringVar()
@@ -28,7 +28,7 @@ class Student:
                 root.destroy()
                 return
         
-        def clearData():
+        def ClearData():
             self.txtStdID.delete(0, END)
             self.txtFna.delete(0, END)
             self.txtSna.delete(0, END)
@@ -38,9 +38,61 @@ class Student:
             self.txtAdr.delete(0, END)
             self.txtMobile.delete(0, END)
 
-        def addData():
+        def AddData():
             if(len(StdID.get()) != 0):
-                dbmanagement_backend(StdID.get(), Firstname.get(), Surname.get(), DoB.get(), Age.get(), Gender.get(), Address.get(), Mobile.get()):
+                    dbmanagement_backend.addStdRec(StdID.get(), Firstname.get(), Surname.get(), DoB.get(), Age.get(), Gender.get(), Address.get(), Mobile.get())
+                    studentlist.delete(0, END)
+                    studentlist.insert(END, (StdID.get(), Firstname.get(), Surname.get(), DoB.get(), Age.get(), Gender.get(), Address.get(), Mobile.get()))
+        
+        def DisplayData():
+            studentlist.delete(0, END)
+            for row in dbmanagement_backend.viewData():
+                studentlist.insert(END, row, str(""))
+        
+        def StudentRec(event):
+            global sd
+            searchStd = studentlist.curselection() [0]
+            sd = studentlist.get(searchStd)
+
+            self.txtStdID.delete(0, END)
+            self.txtStdID.insert(END, sd[1])
+            self.txtFna.delete(0, END)
+            self.txtFnaID.insert(END, sd[2])
+            self.txtSna.delete(0, END)
+            self.txtSnaID.insert(END, sd[3])
+            self.txtDoB.delete(0, END)
+            self.txtDoB.insert(END, sd[4])
+            self.txtAge.delete(0, END)
+            self.txtAge.insert(END, sd[5])
+            self.txtGender.delete(0, END)
+            self.txtGender.insert(END, sd[6])
+            self.txtAdr.delete(0, END)
+            self.txtAdr.insert(END, sd[7])
+            self.txtMobile.delete(0, END)
+            self.txtMobile.insert(END, sd[8])
+        
+        def DeleteData():
+            if(len(StdID.get()) != 0):
+                dbmanagement_backend.deleteRec(sd[0])
+                ClearData()
+                DisplayData()
+        
+        def searchDatabase():
+            studentlist.delete(0, END)
+            for row in dbmanagement_backend.searchData(StdID.get(), Firstname.get(), Surname.get(), DoB.get(), \
+                                                            Age.get(), Gender.get(), Address.get(), Mobile.get()):
+                 studentlist.insert(END, row, str, (""))
+                
+        def update():
+            if(len(StdID.get()) != 0):
+                dbmanagement_backend.deleteRec(sd[0])
+            if(len(StdID.get()) != 0):
+                dbmanagement_backend.addStdRec(StdID.get(), Firstname.get(), Surname.get(), DoB.get(), \
+                                                    Age.get(), Gender.get(), Address.get(), Mobile.get())
+                studentlist.delete(0, END)
+                studentlist.insert(END,(StdID.get(), Firstname.get(), Surname.get(), DoB.get(), \
+                                            Age.get(), Gender.get(), Address.get(), Mobile.get()))
+
 
         #=========================== Frames =============================#
         MainFrame = Frame(self.root, bg="cadet blue")
@@ -50,20 +102,20 @@ class Student:
         TitleFrame.pack(side=TOP)
 
         self.lblTitle = Label(TitleFrame, font=('arial', 40, 'bold'), text="Student Database Management Systems", bg="ghost white")
-        self.lblTitle.grid()
+        self.lblTitle.grid(sticky=W)
 
         ButtonFrame = Frame(MainFrame, bd=2, width=1200, height=70, padx=18, pady=10, bg="ghost white", relief=RIDGE)
         ButtonFrame.pack(side=BOTTOM)
 
         DataFrame = Frame(MainFrame, bd=1, width=950, height=400, padx=20, pady=20, bg="cadet blue", relief=RIDGE)
-        DataFrame.pack(side=TOP)
+        DataFrame.pack(side=BOTTOM)
 
         DataFrameLEFT = LabelFrame(DataFrame, bd=1, width=350, height=600, padx=20, bg="ghost white", relief=RIDGE, 
-                            font=('arial', 20, 'bold'), text="Student Info\n")
+                                font=('arial', 20, 'bold'), text="Student Info\n")
         DataFrameLEFT.pack(side=LEFT)
 
         DataFrameRIGHT = LabelFrame(DataFrame, bd=1, width=300, height=300, padx=31, pady=3, bg="ghost white", relief=RIDGE,
-                            font=('arial', 20, 'bold'), text="Student Details\n")
+                                font=('arial', 20, 'bold'), text="Student Details\n")
         DataFrameRIGHT.pack(side=RIGHT)
 
         #=========================== Labels and entry widget =============================#
@@ -107,31 +159,32 @@ class Student:
         self.txtMobile = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Mobile, width=39)
         self.txtMobile.grid(row=7, column=1)
 
-        #=========================== ListBox & ScrollBar widget =============================#
+                #=========================== ListBox & ScrollBar widget =============================#
         scrollbar = Scrollbar(DataFrameRIGHT)
         scrollbar.grid(row=0, column=1, sticky='ns')
 
         studentlist = Listbox(DataFrameRIGHT, width=41, height=16, font=('arial', 12, 'bold'), yscrollcommand=scrollbar.set)
+        studentlist.bind('<<ListboxSelect>>', StudentRec)
         studentlist.grid(row=0, column=0, padx=8)
         scrollbar.config(command=studentlist.yview)
 
-        #=========================== Button widget =============================#
-        self.btnAddDate = Button(ButtonFrame, text="Add new", font=('arial', 20, 'bold'), height=1, width=8, bd=4)
-        self.btnAddDate.grid(row=0, column=0)
+                #=========================== Button widget =============================#
+        self.btnAddData = Button(ButtonFrame, text="Add new", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=AddData)
+        self.btnAddData.grid(row=0, column=0)
 
-        self.btnDisplayData = Button(ButtonFrame, text="Display", font=('arial', 20, 'bold'), height=1, width=8, bd=4)
+        self.btnDisplayData = Button(ButtonFrame, text="Display", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DisplayData)
         self.btnDisplayData.grid(row=0, column=1)
 
-        self.btnClearData = Button(ButtonFrame, text="Clear", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=clearData)
+        self.btnClearData = Button(ButtonFrame, text="Clear", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=ClearData)
         self.btnClearData.grid(row=0, column=2)
 
-        self.btnDeleteData = Button(ButtonFrame, text="Delete", font=('arial', 20, 'bold'), height=1, width=8, bd=4)
+        self.btnDeleteData = Button(ButtonFrame, text="Delete", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DeleteData)
         self.btnDeleteData.grid(row=0, column=3)
 
-        self.btnSearchData = Button(ButtonFrame, text="Search", font=('arial', 20, 'bold'), height=1, width=8, bd=4)
+        self.btnSearchData = Button(ButtonFrame, text="Search", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=searchDatabase)
         self.btnSearchData.grid(row=0, column=4)
 
-        self.btnUpdateData = Button(ButtonFrame, text="Update", font=('arial', 20, 'bold'), height=1, width=8, bd=4)
+        self.btnUpdateData = Button(ButtonFrame, text="Update", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=update)
         self.btnUpdateData.grid(row=0, column=5)
 
         self.btnExit = Button(ButtonFrame, text="Exit", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=iExit)
