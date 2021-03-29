@@ -8,7 +8,7 @@ class Student:
 
     def __init__(self,root):
         self.root = root
-        self.root.title("Student Database Management System")
+        self.root.title("Tietokantajärjestelmä - Oppilaat")
         self.root.geometry("1350x750+0+0")
         self.root.config(bg="#db46f0")
 
@@ -23,7 +23,7 @@ class Student:
 
         #========================== Functions ===========================#
         def iExit():
-            iExit = tkinter.messagebox.askyesno("Student Database Management System", "Close application?")
+            iExit = tkinter.messagebox.askyesno("Tietokantajärjestelmä - Oppilaat", "Haluatko sulkea sovelluksen?")
             if iExit > 0:
                 root.destroy()
                 return
@@ -101,7 +101,7 @@ class Student:
         TitleFrame = Frame(MainFrame, bd=2, padx=54, pady=8, bg="#eedefd", relief=RIDGE)
         TitleFrame.pack(side=TOP)
 
-        self.lblTitle = Label(TitleFrame, font=('arial', 40, 'bold'), text="Student Database Management Systems", bg="#eedefd")
+        self.lblTitle = Label(TitleFrame, font=('arial', 40, 'bold'), text="Tietokantajärjestelmä - Oppilaat", bg="#eedefd")
         self.lblTitle.grid(sticky=W)
 
         ButtonFrame = Frame(MainFrame, bd=2, width=1200, height=70, padx=18, pady=10, bg="#eedefd", relief=RIDGE)
@@ -111,50 +111,50 @@ class Student:
         DataFrame.pack(side=BOTTOM)
 
         DataFrameLEFT = LabelFrame(DataFrame, bd=1, width=350, height=600, padx=20, bg="#eedefd", relief=RIDGE, 
-                                font=('arial', 20, 'bold'), text="Student Info\n")
+                                font=('arial', 20, 'bold'), text="Oppilaan tiedot\n")
         DataFrameLEFT.pack(side=LEFT)
 
         DataFrameRIGHT = LabelFrame(DataFrame, bd=1, width=300, height=300, padx=31, pady=3, bg="#eedefd", relief=RIDGE,
-                                font=('arial', 20, 'bold'), text="Student Details\n")
+                                font=('arial', 20, 'bold'), text="Lisätiedot\n")
         DataFrameRIGHT.pack(side=RIGHT)
 
         #=========================== Labels and entry widget =============================#
-        self.lblStdID = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Student ID:", padx=2, pady=2, bg="#eedefd")
+        self.lblStdID = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Oppilaan ID:", padx=2, pady=2, bg="#eedefd")
         self.lblStdID.grid(row=0, column=0, sticky=W)
         self.txtStdID = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=StdID, width=39)
         self.txtStdID.grid(row=0, column=1)
 
-        self.lblFna = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="First name:", padx=2, pady=2, bg="#eedefd")
+        self.lblFna = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Etunimi:", padx=2, pady=2, bg="#eedefd")
         self.lblFna.grid(row=1, column=0, sticky=W)
         self.txtFna = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Firstname, width=39)
         self.txtFna.grid(row=1, column=1)
 
-        self.lblSna = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Surname:", padx=2, pady=2, bg="#eedefd")
+        self.lblSna = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Sukunimi:", padx=2, pady=2, bg="#eedefd")
         self.lblSna.grid(row=2, column=0, sticky=W)
         self.txtSna = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Surname, width=39)
         self.txtSna.grid(row=2, column=1)
 
-        self.lblDoB = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Date of birth:", padx=2, pady=3, bg="#eedefd")
+        self.lblDoB = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Syntymäaika:", padx=2, pady=3, bg="#eedefd")
         self.lblDoB.grid(row=3, column=0, sticky=W)
         self.txtDoB = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=DoB, width=39)
         self.txtDoB.grid(row=3, column=1)
 
-        self.lblAge = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Age:", padx=2, pady=3, bg="#eedefd")
+        self.lblAge = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Ikä:", padx=2, pady=3, bg="#eedefd")
         self.lblAge.grid(row=4, column=0, sticky=W)
         self.txtAge = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Age, width=39)
         self.txtAge.grid(row=4, column=1)
 
-        self.lblGender = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Gender:", padx=2, pady=3, bg="#eedefd")
+        self.lblGender = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Sukupuoli:", padx=2, pady=3, bg="#eedefd")
         self.lblGender.grid(row=5, column=0, sticky=W)
         self.txtGender = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Gender, width=39)
         self.txtGender.grid(row=5, column=1)
 
-        self.lblAdr = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Address:", padx=2, pady=3, bg="#eedefd")
+        self.lblAdr = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Osoite:", padx=2, pady=3, bg="#eedefd")
         self.lblAdr.grid(row=6, column=0, sticky=W)
         self.txtAdr = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Address, width=39)
         self.txtAdr.grid(row=6, column=1)
 
-        self.lblMobile = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Mobile:", padx=2, pady=3, bg="#eedefd")
+        self.lblMobile = Label(DataFrameLEFT, font=('arial', 20, 'bold'), text="Puhelinnumero:", padx=2, pady=3, bg="#eedefd")
         self.lblMobile.grid(row=7, column=0, sticky=W)
         self.txtMobile = Entry(DataFrameLEFT, font=('arial', 20, 'bold'), textvariable=Mobile, width=39)
         self.txtMobile.grid(row=7, column=1)
@@ -169,25 +169,25 @@ class Student:
         scrollbar.config(command=studentlist.yview)
 
                 #=========================== Button widget =============================#
-        self.btnAddData = Button(ButtonFrame, text="Add new", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=AddData)
+        self.btnAddData = Button(ButtonFrame, text="Lisää uusi", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=AddData)
         self.btnAddData.grid(row=0, column=0)
 
-        self.btnDisplayData = Button(ButtonFrame, text="Display", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DisplayData)
+        self.btnDisplayData = Button(ButtonFrame, text="Näytä", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DisplayData)
         self.btnDisplayData.grid(row=0, column=1)
 
-        self.btnClearData = Button(ButtonFrame, text="Clear", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=ClearData)
+        self.btnClearData = Button(ButtonFrame, text="Tyhjennä", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=ClearData)
         self.btnClearData.grid(row=0, column=2)
 
-        self.btnDeleteData = Button(ButtonFrame, text="Delete", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DeleteData)
+        self.btnDeleteData = Button(ButtonFrame, text="Poista", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=DeleteData)
         self.btnDeleteData.grid(row=0, column=3)
 
-        self.btnSearchData = Button(ButtonFrame, text="Search", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=searchDatabase)
+        self.btnSearchData = Button(ButtonFrame, text="Hae", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=searchDatabase)
         self.btnSearchData.grid(row=0, column=4)
 
-        self.btnUpdateData = Button(ButtonFrame, text="Update", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=update)
+        self.btnUpdateData = Button(ButtonFrame, text="Päivitä", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=update)
         self.btnUpdateData.grid(row=0, column=5)
 
-        self.btnExit = Button(ButtonFrame, text="Exit", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=iExit)
+        self.btnExit = Button(ButtonFrame, text="Lopeta", font=('arial', 20, 'bold'), height=1, width=8, bd=4, command=iExit)
         self.btnExit.grid(row=0, column=6)
 
 
