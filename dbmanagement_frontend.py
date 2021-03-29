@@ -111,11 +111,11 @@ class Student:
         DataFrame.pack(side=BOTTOM)
 
         DataFrameLEFT = LabelFrame(DataFrame, bd=1, width=350, height=600, padx=20, bg="#f7f7f7", relief=RIDGE, 
-                                font=('arial', 20, 'bold'), text="Oppilaan tiedot\n")
+                                font=('arial', 20, 'bold'), text="Syötä tiedot\n")
         DataFrameLEFT.pack(side=LEFT)
 
         DataFrameRIGHT = LabelFrame(DataFrame, bd=1, width=300, height=300, padx=31, pady=3, bg="#f7f7f7", relief=RIDGE,
-                                font=('arial', 20, 'bold'), text="Lisätiedot\n")
+                                font=('arial', 20, 'bold'), text="Tallennetut tiedot\n")
         DataFrameRIGHT.pack(side=RIGHT)
 
         #=========================== Labels and entry widget =============================#
